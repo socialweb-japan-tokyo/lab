@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAIKI LAB｜Building Products &amp; Ideas</title>
+<meta name="description" content="TAIKI LAB - Building Products & Ideas. プロダクトとアイデアをかたちにする実験室。">
+<meta property="og:title" content="TAIKI LAB｜Building Products & Ideas">
+<meta property="og:description" content="プロダクトとアイデアをかたちにする実験室。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d0c;
+    --bg-soft:#15140f;
+    --ink:#f4f1e8;
+    --ink-dim:#a39e8f;
+    --accent:#e8ff4a;
+    --accent-2:#ff5630;
+    --line:rgba(244,241,232,.14);
+    --card:#16150f;
+    --maxw:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Archivo",system-ui,sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#000;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+    opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px clamp(20px,5vw,56px);
+    mix-blend-mode:difference;
+  }
+  .logo{
+    font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.06em;
+    color:#fff;line-height:1;
+  }
+  .logo span{color:var(--accent);}
+  nav ul{display:flex;gap:clamp(14px,2.4vw,34px);list-style:none;}
+  nav a{
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;
+    letter-spacing:.18em;text-transform:uppercase;color:#fff;
+    position:relative;
+  }
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;
+    background:#fff;transition:width .3s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .menu-btn{display:none;background:none;border:none;color:#fff;font-family:"Archivo";font-weight:700;font-size:12px;letter-spacing:.18em;cursor:pointer;}
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:140px clamp(20px,5vw,56px) 80px;position:relative;
+    background:
+      radial-gradient(120% 90% at 85% 10%, rgba(232,255,74,.10), transparent 55%),
+      radial-gradient(90% 80% at 5% 95%, rgba(255,86,48,.10), transparent 50%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"BUILDING";position:absolute;right:-4vw;top:8vh;
+    font-family:"Anton",sans-serif;font-size:26vw;color:rgba(244,241,232,.03);
+    line-height:.8;letter-spacing:-.02em;pointer-events:none;white-space:nowrap;
+  }
+  .eyebrow{
+    font-family:"Archivo";font-weight:700;font-size:13px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:30px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:46px;height:1px;background:var(--accent);}
+  .hero h1{
+    font-family:"Anton",sans-serif;font-weight:400;
+    font-size:clamp(48px,11.5vw,178px);line-height:.92;letter-spacing:-.01em;
+    text-transform:uppercase;
+  }
+  .hero h1 .em{color:var(--accent);}
+  .hero h1 .out{
+    -webkit-text-stroke:2px var(--ink);color:transparent;
+  }
+  .hero-sub{
+    margin-top:38px;max-width:560px;font-size:clamp(15px,1.6vw,18px);
+    color:var(--ink-dim);font-weight:500;
+  }
+  .scroll-hint{
+    position:absolute;bottom:34px;left:clamp(20px,5vw,56px);
+    font-family:"Archivo";font-weight:700;font-size:11px;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--ink-dim);
+    display:flex;align-items:center;gap:10px;
+  }
+  .scroll-hint .bar{width:1px;height:40px;background:var(--ink-dim);display:inline-block;position:relative;overflow:hidden;}
+  .scroll-hint .bar::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(-100%);animation:sc 2s infinite;}
+  @keyframes sc{0%{transform:translateY(-100%);}50%{transform:translateY(0);}100%{transform:translateY(100%);}}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ===== Section heading ===== */
+  .sec{padding:clamp(90px,13vw,170px) clamp(20px,5vw,56px);max-width:var(--maxw);margin:0 auto;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(40px,6vw,72px);flex-wrap:wrap;}
+  .sec-num{font-family:"Archivo";font-weight:800;font-size:13px;letter-spacing:.2em;color:var(--accent);}
+  .sec-title{font-family:"Anton",sans-serif;font-size:clamp(34px,6vw,84px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em;}
+
+  /* ===== About ===== */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center;}
+  .about-lead{font-family:"Anton",sans-serif;font-size:clamp(24px,3.6vw,46px);line-height:1.18;text-transform:none;letter-spacing:.01em;}
+  .about-lead em{color:var(--accent);font-style:normal;}
+  .about-body{color:var(--ink-dim);font-size:16px;font-weight:500;}
+  .about-body p+p{margin-top:18px;}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .tag{font-family:"Archivo";font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:8px 14px;border-radius:999px;color:var(--ink);}
+
+  /* ===== Works ===== */
+  .works-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .work{
+    display:grid;grid-template-columns:64px 1fr auto;gap:clamp(16px,3vw,40px);
+    align-items:center;padding:clamp(26px,4vw,46px) 4px;border-bottom:1px solid var(--line);
+    position:relative;transition:padding-left .4s ease;
+  }
+  .work::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(232,255,74,.10),transparent);transition:width .4s ease;z-index:0;}
+  .work:hover::before{width:100%;}
+  .work>*{position:relative;z-index:1;}
+  .work:hover{padding-left:18px;}
+  .work-idx{font-family:"Archivo";font-weight:800;font-size:14px;color:var(--accent);}
+  .work-main h3{font-family:"Anton",sans-serif;font-size:clamp(24px,4.4vw,52px);line-height:1;text-transform:uppercase;letter-spacing:-.005em;transition:color .3s;}
+  .work:hover .work-main h3{color:var(--accent);}
+  .work-main p{margin-top:10px;color:var(--ink-dim);font-size:14px;font-weight:500;}
+  .work-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+  .work-meta span{font-family:"Archivo";font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);border:1px solid var(--line);padding:5px 9px;border-radius:999px;}
+  .work-arrow{font-family:"Archivo";font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .work-arrow .ar{display:inline-block;transition:transform .35s ease;}
+  .work:hover .work-arrow .ar{transform:translateX(6px);}
+
+  /* ===== Marquee ===== */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:26px 0;background:var(--bg-soft);}
+  .marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marq 28s linear infinite;width:max-content;}
+  .marquee-track span{font-family:"Anton",sans-serif;font-size:clamp(28px,5vw,64px);text-transform:uppercase;color:transparent;-webkit-text-stroke:1.4px var(--ink-dim);letter-spacing:.01em;}
+  .marquee-track span.fill{color:var(--accent);-webkit-text-stroke:0;}
+  @keyframes marq{to{transform:translateX(-50%);}}
+
+  /* ===== Contact ===== */
+  .contact{padding:clamp(90px,14vw,180px) clamp(20px,5vw,56px);text-align:center;position:relative;}
+  .contact h2{font-family:"Anton",sans-serif;font-size:clamp(40px,10vw,140px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em;}
+  .contact h2 a{color:var(--accent);transition:opacity .3s;}
+  .contact h2 a:hover{opacity:.6;}
+  .contact p{margin-top:26px;color:var(--ink-dim);font-weight:500;max-width:480px;margin-left:auto;margin-right:auto;}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:34px clamp(20px,5vw,56px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer .f-logo{font-family:"Anton",sans-serif;font-size:18px;letter-spacing:.05em;}
+  footer .f-logo span{color:var(--accent);}
+  footer small{color:var(--ink-dim);font-family:"Archivo";font-weight:600;font-size:12px;letter-spacing:.08em;}
+
+  @media(max-width:760px){
+    nav ul{display:none;}
+    .menu-btn{display:block;}
+    .about-grid{grid-template-columns:1fr;}
+    .work{grid-template-columns:40px 1fr;}
+    .work-arrow{grid-column:2;justify-content:flex-start;margin-top:6px;}
+    .hero::before{font-size:40vw;top:auto;bottom:6vh;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#top" class="logo">TAIKI<span>·</span>LAB</a>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <button class="menu-btn" onclick="document.querySelector('#works').scrollIntoView({behavior:'smooth'})">Menu</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="eyebrow reveal">Building Products &amp; Ideas</div>
+  <h1 class="reveal">
+    We build<br>
+    <span class="em">products</span> &amp;<br>
+    <span class="out">ideas</span>.
+  </h1>
+  <p class="hero-sub reveal">TAIKI LAB は、思いついたアイデアを実際に動くプロダクトへと変える実験室。AIとデータ、そして旅をテーマに、小さく速くつくり続けています。</p>
+  <div class="scroll-hint"><span class="bar"></span>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sec-head reveal">
+    <span class="sec-num">01 / About</span>
+    <h2 class="sec-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-lead reveal">
+      つくりたいものを、<br>
+      <em>つくれるうちに、</em><br>
+      ぜんぶつくる。
+    </div>
+    <div class="about-body reveal">
+      <p>TAIKI LAB は、ひとりの "つくる人" が運営する小さなプロダクトラボです。投資・金融データを扱うアプリから、旅と健康をテーマにした情報サイトまで、ジャンルにとらわれず手を動かしています。</p>
+      <p>「あったらいいな」を頭の中で終わらせず、実際に触れるかたちにすること。それがこのラボの唯一のルールです。</p>
+      <div class="tags">
+        <span>Web App</span><span>AI / Data</span><span>Frontend</span><span>Product Design</span><span>Travel</span><span>Health</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Build</span><span class="fill">·</span><span>Ship</span><span class="fill">·</span><span>Learn</span><span class="fill">·</span><span>Repeat</span><span class="fill">·</span>
+    <span>Build</span><span class="fill">·</span><span>Ship</span><span class="fill">·</span><span>Learn</span><span class="fill">·</span><span>Repeat</span><span class="fill">·</span>
+  </div>
+</div>
+
+<!-- WORKS -->
+<section class="sec" id="works">
+  <div class="sec-head reveal">
+    <span class="sec-num">02 / Works</span>
+    <h2 class="sec-title">Works</h2>
+  </div>
+  <div class="works-list">
+
+    <a class="work reveal" href="https://ai-invest-radar.vercel.app/" target="_blank" rel="noopener">
+      <div class="work-idx">001</div>
+      <div class="work-main">
+        <h3>AI Invest Radar</h3>
+        <p>AIが企業のファンダメンタルズを採点し、割安度・財務健全性・配当・成長性をひと目で可視化する株式分析ダッシュボード。</p>
+        <div class="work-meta"><span>Web App</span><span>AI Scoring</span><span>Finance</span><span>Data Viz</span></div>
+      </div>
+      <div class="work-arrow">Visit <span class="ar">&rarr;</span></div>
+    </a>
+
+    <a class="work reveal" href="https://socialweb-japan-tokyo.github.io/onsen-health-travel/" target="_blank" rel="noopener">
+      <div class="work-idx">002</div>
+      <div class="work-main">
+        <h3>効能旅 / Kounou Tabi</h3>
+        <p>「効能」で選ぶ、日本の温泉旅ガイド。地図と効能フィルターから、自分の体に合う温泉地を見つけられるウェルネストラベルサイト。</p>
+        <div class="work-meta"><span>Web Site</span><span>Map / Filter</span><span>Travel</span><span>Wellness</span></div>
+      </div>
+      <div class="work-arrow">Visit <span class="ar">&rarr;</span></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <h2>Let's<br>build <a href="#works">something</a>.</h2>
+    <p>新しいプロダクトのアイデア、コラボレーション、ちょっとした相談まで。気軽に声をかけてください。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">TAIKI<span>·</span>LAB</div>
+  <small>© <span id="yr"></span> TAIKI LAB — Building Products &amp; Ideas</small>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4*0.08)+'s'; io.observe(el); });
+</script>
+</body>
+</html>
