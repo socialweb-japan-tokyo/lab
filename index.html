@@ -129,6 +129,20 @@
   .about-body{color:var(--ink-dim);font-size:16px;font-weight:500;}
   .about-body p+p{margin-top:18px;}
   .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .tags-line{margin-top:30px;display:flex;flex-direction:column;gap:4px;}
+  .tags-line span{
+    font-family:"Anton",sans-serif;
+    font-size:clamp(20px,2.6vw,32px);
+    line-height:1.12;letter-spacing:.01em;text-transform:uppercase;
+    background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 38%,var(--accent) 50%,var(--ink) 62%,var(--ink) 100%);
+    background-size:280% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:shimmer 3.4s linear infinite;
+  }
+  .tags-line span:nth-child(2){animation-delay:.25s;}
+  .tags-line span:nth-child(3){animation-delay:.5s;}
+  @keyframes shimmer{0%{background-position:140% 0;}100%{background-position:-140% 0;}}
   .tag{font-family:"Archivo";font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:8px 14px;border-radius:999px;color:var(--ink);}
 
   /* ===== Works ===== */
@@ -229,8 +243,10 @@
 頭の中のアイデアをそのままにせず、実際に触れられるかたちにすること。それがこのラボの唯一のルールです。
 LAB&は、そんな小さな実験の積み重ねから生まれる場所です。
 </p>
-      <div class="tags">
-        <span>Web App</span><span>AI / Data</span><span>Frontend</span><span>Product Design</span><span>Travel</span><span>Health</span>
+      <div class="tags-line">
+        <span>Build everything</span>
+        <span>worth building,</span>
+        <span>while you still can.</span>
       </div>
     </div>
   </div>
