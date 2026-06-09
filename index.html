@@ -110,7 +110,7 @@
   }
   .scroll-hint .bar{width:1px;height:40px;background:var(--ink-dim);display:inline-block;position:relative;overflow:hidden;}
   .scroll-hint .bar::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(-100%);animation:sc 2s infinite;}
-  keyframes sc{0%{transform:translateY(-100%);}50%{transform:translateY(0);}100%{transform:translateY(100%);}}
+  @keyframes sc{0%{transform:translateY(-100%);}50%{transform:translateY(0);}100%{transform:translateY(100%);}}
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
@@ -185,7 +185,7 @@
 <body>
 
 <header>
-  <a href="#top" class="logo"></span>LAB&</a>
+  <a href="#top" class="logo">LAB&</a>
   <nav>
     <ul>
       <li><a href="#about">About</a></li>
@@ -283,7 +283,7 @@ LAB&は、そんな小さな実験の積み重ねから生まれる場所です�
 </section>
 
 <footer>
-  <div class="f-logo"></span>LAB&</div>
+  <div class="f-logo">LAB&</div>
   <small>© <span id="yr"></span> LAB& — Building Products &amp; Ideas</small>
 </footer>
 
