@@ -157,7 +157,7 @@
   .marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marq 28s linear infinite;width:max-content;}
   .marquee-track span{font-family:"Anton",sans-serif;font-size:clamp(28px,5vw,64px);text-transform:uppercase;color:transparent;-webkit-text-stroke:1.4px var(--ink-dim);letter-spacing:.01em;}
   .marquee-track span.fill{color:var(--accent);-webkit-text-stroke:0;}
-  keyframes marq{to{transform:translateX(-50%);}}
+  @keyframes marq{to{transform:translateX(-50%);}}
 
   /* ===== Contact ===== */
   .contact{padding:clamp(90px,14vw,180px) clamp(20px,5vw,56px);text-align:center;position:relative;}
